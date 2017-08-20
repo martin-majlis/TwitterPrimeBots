@@ -58,6 +58,9 @@ auth.set_access_token(
 )
 api = tweepy.API(auth)
 
+# like previous status
+api.create_favorite(state[KEY_ID])
+
 # Construct tweet
 tweet = ""
 tweet += random.choice([
