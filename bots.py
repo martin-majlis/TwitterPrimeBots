@@ -58,9 +58,6 @@ auth.set_access_token(
 )
 api = tweepy.API(auth)
 
-# like previous status
-api.create_favorite(state[KEY_ID])
-
 # Construct tweet
 tweet = ""
 tweet += random.choice([
@@ -83,13 +80,35 @@ tweet += random.choice([
 tweet += (str)(next_prime)
 tweet += " (https://prime-numbers.info/number/" + (str)(next_prime) + ")."
 
-tweet += " #math #mathchat #primes #bot"
+# Put random tags at the end
+tags = [
+    '#math',
+    '#mathchat',
+    '#primes',
+    '#PrimeNumbers',
+    '#numberphile',
+    '#number',
+    '#school',
+    '#MathIsFun',
+    '#numbertheory',
+    '#TechEd',
+    '#STEM'
+]
+random.shuffle(tags)
+for tag in tags:
+    if (len(tweet) + len(tag) > 150):
+        break
+    tweet += " " + tag
+
 print(
     "Tweeting as " +
     BOT_NAMES[next_bot] +
     " (" + (str)(len(tweet)) + "): " +
     tweet
 )
+
+# like previous status
+api.create_favorite(state[KEY_ID])
 
 # Tweet
 result = api.update_status(
