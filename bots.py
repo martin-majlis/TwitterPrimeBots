@@ -115,6 +115,12 @@ result = api.update_status(
     status=tweet,
     in_reply_to_status_id=state[KEY_ID]
 )
+print(
+    "Tweet URL: http://twitter.com/" +
+    BOT_NAMES[next_bot][1:] +
+    "/status/" +
+    result.id_str
+)
 
 # Update state
 with open(FILE_STATE, 'w') as state_file:
